@@ -8,11 +8,12 @@
         /* ===================================== */
         /*            General Styles             */
         /* ===================================== */
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth; /* For smoother scrolling */
         }
 
         :root {
@@ -20,24 +21,24 @@
             --primary-gradient: linear-gradient(180deg, #3a3a3a, #3a3a3a); /* Pure black */
             --secondary-gradient: linear-gradient(135deg, #000, #3a3a3a); /* Pure black */
             --accent-color: #76B900;
-             --hover-color: rgba(118, 185, 0, 0.8); /* Slightly darker green with some transparency for hover */
+            --hover-color: rgba(118, 185, 0, 0.85); /* Slightly darker green with more noticeable hover */
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
             --thinking-bg: #1a1a1a; /* Dark grey for thinking background */
-            --thinking-transition-duration: 0.4s;
-            --thinking-button-height: 100px;
-            --thinking-button-expanded-padding: 1.5rem;
-            --voice-button-size: 60px;
+            --thinking-transition-duration: 0.3s; /* Slightly faster transition */
+            --thinking-button-height: 80px; /* Slightly smaller default height */
+            --thinking-button-expanded-padding: 1.25rem; /* Slightly reduced padding */
+            --voice-button-size: 50px; /* Smaller voice button */
             --accent-color-rgb: 118, 185, 0; /* RGB value for box-shadow */
         }
 
         body {
-            background: linear-gradient(180deg, #0a0a0a, #1a1a1a); /* Very dark gradient, not pure black */
+            background: linear-gradient(180deg, #0a0a0a, #1a1a1a); /* Very dark gradient */
             color: var(--text-primary);
             display: flex;
             min-height: 100vh;
-            overflow: hidden;
-            transition: filter 0.3s ease;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            transition: filter 0.2s ease-in-out; /* Smoother blur transition */
         }
 
         body.blur {
@@ -47,19 +48,24 @@
         /* ===================================== */
         /*               Sidebar                 */
         /* ===================================== */
+        .sidebar {
+            background: var(--secondary-gradient);
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 100;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+        }
+
         @media (min-width: 769px) {
             .sidebar {
                 width: var(--sidebar-width);
-                background: var(--secondary-gradient);
-                padding: 1.5rem 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                 border-right: 1px solid rgba(255, 255, 255, 0.1);
-                position: fixed;
-                height: 100vh;
-                z-index: 100;
-                transition: transform 0.3s ease-in-out;
                 transform: translateX(0);
             }
 
@@ -71,20 +77,8 @@
 
         @media (max-width: 768px) {
             .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100vh;
-                width: var(--sidebar-width);
-                background: var(--secondary-gradient);
-                padding: 1.5rem 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                 border-right: 1px solid rgba(255, 255, 255, 0.1);
-                z-index: 1000;
+                width: 65px; /* Slightly smaller on mobile */
                 transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
             }
 
             .sidebar.open {
@@ -107,7 +101,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
+            padding-top: 0.5rem;
         }
 
         .sidebar-bottom {
@@ -115,14 +110,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             padding-bottom: 1rem;
         }
 
         .sidebar-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 40px; /* Slightly smaller buttons */
+            height: 40px;
+            border-radius: 10px;
             background: transparent;
             border: none;
             color: var(--text-secondary);
@@ -130,26 +125,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease-in-out;
             position: relative;
-            font-size: 24px;
+            font-size: 1.2rem; /* Adjusted font size */
         }
 
         .sidebar-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             color: var(--text-primary);
-            transform: translateY(-1px);
+            transform: scale(1.05); /* Subtle scale on hover */
         }
 
         .notification-dot {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 10px;
-            height: 10px;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
             background: var(--accent-color);
             border-radius: 50%;
-            border: 2px solid #000000;
+            border: 1.5px solid #000000;
         }
           /* ===================================== */
         /*            Main Content Area            */
@@ -158,9 +153,9 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh; /* Ensure full height */
             position: relative;
-            transition: margin-left 0.3s ease-in-out;
+            transition: margin-left 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
           /* ===================================== */
         /*               Header                   */
@@ -169,15 +164,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 2rem;
+            padding: 0.75rem 1rem; /* Reduced padding */
             background: var(--secondary-gradient);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 50; /* Ensure header is above content */
         }
 
         .model-selector {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .header .sidebar-toggle-btn {
@@ -185,9 +181,14 @@
             border: none;
             color: var(--text-primary);
             cursor: pointer;
-            font-size: 24px;
-            margin-right: 1rem;
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
             display: none;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .header .sidebar-toggle-btn:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
@@ -197,45 +198,41 @@
         }
 
         .model-selector h2 {
-            font-size: 1.25rem;
+            font-size: 1rem; /* Smaller font on mobile */
             font-weight: 600;
-            transition: color 0.3s ease, background-clip 0.3s ease;
+            transition: color 0.2s ease, background-clip 0.2s ease;
             text-fill-color: transparent;
             -webkit-background-clip: text;
             color: var(--text-primary);
         }
 
         .model-selector h2.voice-active {
-           background-image: linear-gradient(to right, #76B900, #000000, #76B900); /* Green and black wave */
+           background-image: linear-gradient(to right, #76B900, #000000, #76B900);
             background-size: 200% 100%;
-            animation: wave-text 3s linear infinite;
+            animation: wave-text 2.5s linear infinite; /* Slightly faster wave */
         }
 
         @keyframes wave-text {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
         }
 
         .try-advanced {
-            padding: 0.75rem 1.25rem;
-            border-radius: 16px;
+            padding: 0.5rem 1rem; /* Reduced padding */
+            border-radius: 14px;
             background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.85rem; /* Smaller font */
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            gap: 0.4rem;
+            transition: all 0.2s ease-in-out;
         }
 
         .try-advanced:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-1px);
         }
          /* ===================================== */
@@ -244,29 +241,33 @@
         .chat-wrapper {
             flex: 1;
             overflow-y: auto;
-            padding: 2rem 0;
+            padding: 1rem 0; /* Reduced padding */
             scroll-behavior: smooth;
-            background: #000; /* Dark grey background for chat area */
+            background: #000;
         }
         .chat-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 2rem;
-             background: #000; /* Dark grey background for chat area */
+            padding: 0 1rem; /* Reduced padding */
+             background: #000;
         }
          /* ===================================== */
         /*               Messages                 */
         /* ===================================== */
         .message {
             display: flex;
-            gap: 1.25rem;
-            margin-bottom: 2rem;
-            padding: 1.25rem;
-            border-radius: 16px;
-             background: #242424; /* Dark grey for message bubbles */
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            max-width: 80%;
+            gap: 0.75rem; /* Reduced gap */
+            margin-bottom: 1.25rem; /* Reduced margin */
+            padding: 0.75rem; /* Reduced padding */
+            border-radius: 12px;
+             background: #242424;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            max-width: 85%;
+        }
+        .message:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            transform: translateY(-1px);
         }
         .message {
             margin-left: 0;
@@ -276,51 +277,65 @@
             flex-direction: row-reverse;
             margin-left: auto;
             margin-right: 0;
-            background: rgba(0, 0, 0, 0.5); /* Black with some transparency for user message */
+            background: rgba(0, 0, 0, 0.5);
             max-width: fit-content;
         }
         .message.ai-message {
             background: #242424;
         }
         .message.user-message .avatar {
-            margin-left: 1rem;
+            margin-left: 0.75rem;
             margin-right: 0;
         }
-          .message:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-1px);
-        }
-            .avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+          .avatar {
+            width: 36px; /* Smaller avatar */
+            height: 36px;
+            border-radius: 10px;
             background: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: 1.25rem;
+            font-size: 0.9rem; /* Smaller font in avatar */
             flex-shrink: 0;
+            transition: all 0.2s ease-in-out;
+        }
+        @media (max-width: 600px) {
+            .message {
+                padding: 0.6rem;
+                border-radius: 10px;
+            }
+            .avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
         }
     .loading-message .avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
     }
         .message-content {
             flex: 1;
-            line-height: 1.5;
-            font-size: 1.1rem;
+            line-height: 1.4;
+            font-size: 0.95rem; /* Smaller font in messages */
             display: flex;
             flex-direction: column;
             word-break: break-word;
+            transition: font-size 0.2s ease-in-out;
         }
         .ai-message .message-content ol {
-             padding-left: 20px;
+             padding-left: 15px;
         }
         .ai-message .message-content li {
-             margin-left: 10px;
-            padding-left: 5px;
+             margin-left: 8px;
+            padding-left: 4px;
+        }
+        @media (max-width: 600px) {
+            .message-content {
+                font-size: 0.85rem;
+            }
         }
              /* ===================================== */
         /*           Loading Animation           */
@@ -328,13 +343,13 @@
         .loading-indicator {
             display: flex;
             flex-direction: column;
-            gap: 13px;
+            gap: 8px;
             width: 100%;
         }
         .loading-line {
-            height: 14px;
-            background: linear-gradient(to right, #333, var(--text-secondary)); /* Dark grey for loading */
-            border-radius: 7px;
+            height: 10px;
+            background: linear-gradient(to right, #333, var(--text-secondary));
+            border-radius: 5px;
             overflow: hidden;
             transform-origin: left center;
             animation-fill-mode: forwards;
@@ -347,52 +362,44 @@
             height: 100%;
             background: linear-gradient(to right, var(--text-secondary), #444, var(--text-secondary));
             background-size: 200% 100%;
-            animation: shimmer 2s linear infinite;
+            animation: shimmer 1.8s linear infinite; /* Slightly faster shimmer */
         }
         .loading-line:nth-child(1) {
             width: 30%;
-            animation: appear-line 0.8s forwards;
+            animation: appear-line 0.6s forwards;
         }
         .loading-line:nth-child(1)::before {
-            animation-duration: 2.5s;
+            animation-duration: 2s;
         }
         .loading-line:nth-child(2) {
             width: 100%;
-            animation: appear-line 1.1s 0.3s forwards;
+            animation: appear-line 0.9s 0.2s forwards;
         }
         .loading-line:nth-child(2)::before {
-            animation-duration: 1.8s;
+            animation-duration: 1.5s;
         }
         .loading-line:nth-child(3) {
             width: 80%;
-            animation: appear-line 0.75s 0.1s forwards;
+            animation: appear-line 0.6s 0.1s forwards;
         }
         .loading-line:nth-child(3)::before {
-            animation-duration: 3s;
+            animation-duration: 2.5s;
         }
          .loading-line:nth-child(4) {
             width: 40%;
-            animation: appear-line 1.1s 0.4s forwards;
+            animation: appear-line 0.9s 0.3s forwards;
         }
         .loading-line:nth-child(4)::before {
-            animation-duration: 1.6s;
+            animation-duration: 1.3s;
         }
          @keyframes appear-line {
-            0% {
-                transform: scaleX(0);
-            }
-            100% {
-                transform: scaleX(1);
-            }
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
         }
 
         @keyframes shimmer {
-            0% {
-                background-position: 100% 0;
-            }
-            100% {
-                background-position: -100% 0;
-            }
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
         }
         /* ===================================== */
         /*               Input Area              */
@@ -401,10 +408,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2rem;
-            background: #0a0a0a; /* Very dark grey */
-            backdrop-filter: blur(20px);
-             border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line */
+            padding: 1.25rem; /* Reduced padding */
+            background: #0a0a0a;
+            backdrop-filter: blur(15px);
+             border-top: 1px solid rgba(255, 255, 255, 0.1);
+             z-index: 50;
         }
 
         @media (min-width: 769px) {
@@ -418,33 +426,33 @@
             margin: 0 auto;
             position: relative;
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             align-items: flex-end;
         }
 
         .chat-input {
             flex: 1;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.2rem; /* Reduced padding */
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
+            border-radius: 14px;
             color: var(--text-primary);
-            font-size: 1.1rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.4;
             resize: none;
             outline: none;
-            transition: all 0.3s ease;
-            max-height: 200px;
-            min-height: 60px;
+            transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            max-height: 150px;
+            min-height: 50px;
         }
         .chat-input:focus {
             border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
         }
         .send-button {
             width: var(--voice-button-size);
             height: var(--voice-button-size);
-            border-radius: 16px;
+            border-radius: 14px;
             background: var(--accent-color);
             border: none;
             color: black;
@@ -452,7 +460,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
             flex-shrink: 0;
             position: relative;
             margin-bottom: 0;
@@ -460,12 +468,12 @@
 
         .send-button:hover {
             background: var(--hover-color);
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
         .send-button svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             stroke: black;
             transform: rotate(45deg);
         }
@@ -476,16 +484,16 @@
         .voice-button {
             width: var(--voice-button-size);
             height: var(--voice-button-size);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 24px;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            font-size: 1.2rem;
             flex-shrink: 0;
             margin-bottom: 0;
             outline: none;
@@ -493,13 +501,13 @@
 
         .voice-button:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
         .voice-button.active {
             background: var(--accent-color);
             color: black;
-            box-shadow: 0 0 0 4px rgba(var(--accent-color-rgb, 118, 185, 0), 0.4);
+            box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb, 118, 185, 0), 0.5);
         }
 
         .voice-button.active:hover {
@@ -507,28 +515,19 @@
         }
 
         .voice-button svg {
-            width: 24px;
-            height: 24px;
-             stroke: currentColor; /* Inherit color for the voice icon */
+            width: 20px;
+            height: 20px;
+             stroke: currentColor;
         }
 
         @keyframes pulse-mic {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
         .voice-button.listening {
-            animation: pulse-mic 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+            animation: pulse-mic 1.2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Slightly faster pulse */
         }
 
         /* ===================================== */
@@ -539,16 +538,16 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background-image: linear-gradient(to right, #76B900, #000000, #76B900); /* Green and black wave */
+            height: 4px;
+            background-image: linear-gradient(to right, #76B900, #000000, #76B900);
             background-size: 200% 100%;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 8px 8px;
             pointer-events: none;
             opacity: 0;
             z-index: 10;
-            animation: wave-border 2s linear infinite;
-            backdrop-filter: blur(5px);
-            transition: opacity 0.3s ease;
+            animation: wave-border 1.8s linear infinite; /* Slightly faster wave */
+            backdrop-filter: blur(3px);
+            transition: opacity 0.2s ease-in-out;
         }
 
         .voice-mode-indicator.active {
@@ -556,19 +555,15 @@
         }
 
         @keyframes wave-border {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
         }
 
           /* ===================================== */
         /*             Scrollbar Styling         */
         /* ===================================== */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -576,60 +571,64 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
         }
         /* ===================================== */
         /*         Mobile Responsiveness         */
         /* ===================================== */
         @media (max-width: 768px) {
             :root {
-                --sidebar-width: 60px;
-                --voice-button-size: 50px;
+                --sidebar-width: 55px;
+                --voice-button-size: 40px;
             }
-
             .chat-container {
-                padding: 0 1rem;
+                padding: 0 0.75rem;
             }
             .input-container {
-                padding: 1rem;
-            padding-bottom: 5rem; /* Adjust this value as needed */
+                padding: 0.75rem;
+                padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem); /* Account for safe area */
             }
             .sidebar-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
             }
            .message {
                 flex-direction: row;
                 align-items: flex-start;
-                max-width: 90%;
+                max-width: 95%;
+                padding: 0.6rem;
+                border-radius: 10px;
+                margin-bottom: 1rem;
             }
             .message.user-message {
                 flex-direction: row-reverse;
                 align-items: flex-start;
                 margin-left: auto;
-                margin-right: 1rem;
-                max-width: 80%;
+                margin-right: 0.5rem;
+                max-width: 90%;
             }
             .avatar {
-                margin-bottom: 0;
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
             }
             .message.user-message .avatar {
-                margin-bottom: 0;
                 margin-left: 0;
-                margin-right: 0;
+                margin-right: 0.5rem;
             }
             .message-content {
                 width: auto;
+                font-size: 0.8rem;
             }
 
             .voice-button {
-                font-size: 20px;
+                font-size: 1rem;
             }
              .send-button {
                 width: var(--voice-button-size);
@@ -640,7 +639,7 @@
         /*         Thinking Button Styling       */
         /* ===================================== */
          .thinking-container {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             overflow: hidden;
             transition: height var(--thinking-transition-duration) ease-in-out;
         }
@@ -657,14 +656,14 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            padding: 1rem 2rem;
-             background: linear-gradient(135deg, #000000, var(--accent-color)); /* Black and green gradient */
-            border-radius: 16px;
+            padding: 0.75rem 1.25rem;
+             background: linear-gradient(135deg, #000000, var(--accent-color));
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.2s ease-in-out, transform 0.15s ease-in-out;
             width: 100%;
             text-align: left;
             position: relative;
@@ -677,7 +676,7 @@
         }
 
         .thinking-button:active {
-            transform: scale(0.98);
+            transform: scale(0.99);
         }
         .thinking-button-top {
             display: flex;
@@ -688,64 +687,59 @@
 
        .thinking-button-title {
             font-weight: 700;
-            letter-spacing: 0.04em;
-            margin-right: 0.75rem;
-            line-height: 1.1;
-            transition: font-size 0.3s ease, background-position 1.5s linear;
-           background-image: linear-gradient(to right, #ffffff, #76B900, #ffffff); /* White and green hint in title */
+            letter-spacing: 0.03em;
+            margin-right: 0.5rem;
+            line-height: 1;
+            transition: font-size 0.2s ease-in-out, background-position 1.2s linear;
+           background-image: linear-gradient(to right, #ffffff, #76B900, #ffffff);
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            padding-right: 0.1em;
-            padding-bottom: 0.05em;
+            padding-right: 0.05em;
+            padding-bottom: 0.03em;
+            font-size: 0.9rem;
         }
 
         .thinking-button:hover .thinking-button-title {
-            font-size: 1.2rem;
+            font-size: 0.95rem;
              background-position: 200% 0;
         }
 
          .thinking-button-dots {
             display: flex;
-            gap: 0.4rem;
-            line-height: 1.1;
+            gap: 0.3rem;
+            line-height: 1;
         }
         .thinking-button-dot {
-             width: 10px;
-            height: 10px;
+             width: 8px;
+            height: 8px;
              border-radius: 50%;
-             background-color: #fff; /* Green dots */
-             border: 2px solid black; /* Added black border */
-             animation: pulse-dot 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+             background-color: #fff;
+             border: 1.5px solid black;
+             animation: pulse-dot 1.2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Slightly faster pulse */
         }
         .thinking-button-dot:nth-child(2) {
-            animation-delay: 0.4s;
+            animation-delay: 0.3s;
         }
         .thinking-button-dot:nth-child(3) {
-            animation-delay: 0.8s;
+            animation-delay: 0.6s;
         }
 
         @keyframes pulse-dot {
-            0%, 100% {
-                transform: scale(0.9);
-                opacity: 0.7;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
+            0%, 100% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
 
         .thinking-button-right {
             position: absolute;
             top: 50%;
-            right: 2rem;
+            right: 1.25rem;
            transform: translateY(-50%);
         }
 
         .thinking-button-arrow {
-            font-size: 1rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
              transition: transform var(--thinking-transition-duration) ease-in-out;
              transform: translateY(1px);
@@ -756,31 +750,31 @@
         }
 
        .thinking-expand-text {
-          font-size: 0.9rem;
+          font-size: 0.8rem;
          color: var(--text-secondary);
          position: absolute;
-           left: 2rem;
-            bottom: 1rem;
+           left: 1.25rem;
+            bottom: 0.75rem;
            transition: color var(--thinking-transition-duration) ease-in-out, left var(--thinking-transition-duration) ease-in-out, bottom var(--thinking-transition-duration) ease-in-out;
         }
 
         .thinking-container.expanded .thinking-expand-text {
-           /* transition: opacity var(--thinking-transition-duration) ease-in-out, transform var(--thinking-transition-duration) ease-in-out; */
+           opacity: 0;
         }
         .thinking-process {
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
             padding: var(--thinking-button-expanded-padding);
             background-color: var(--thinking-bg);
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
+            line-height: 1.4;
             color: var(--text-secondary);
             white-space: pre-wrap;
             overflow-x: auto;
             opacity: 0;
-            transform: translateY(-5px);
-            transition: opacity var(--thinking-transition-duration) ease-in-out, transform var(--thinking-transition-duration) ease--out, padding var(--thinking-transition-duration) ease-in-out;
+            transform: translateY(-3px);
+            transition: opacity var(--thinking-transition-duration) ease-in-out, transform var(--thinking-transition-duration) ease-out, padding var(--thinking-transition-duration) ease-in-out;
         }
 
         .thinking-container.expanded .thinking-process {
@@ -795,29 +789,61 @@
             border-bottom-right-radius: 0;
              margin-top: 0;
         }
+        @media (max-width: 600px) {
+            :root {
+                --thinking-button-height: 70px;
+                --thinking-button-expanded-padding: 1rem;
+            }
+            .thinking-button {
+                padding: 0.6rem 1rem;
+                height: var(--thinking-button-height);
+            }
+            .thinking-button-title {
+                font-size: 0.8rem;
+                margin-right: 0.4rem;
+            }
+            .thinking-button:hover .thinking-button-title {
+                font-size: 0.85rem;
+            }
+            .thinking-button-right {
+                right: 1rem;
+            }
+            .thinking-expand-text {
+                font-size: 0.7rem;
+                left: 1rem;
+                bottom: 0.6rem;
+            }
+            .thinking-process {
+                font-size: 0.75rem;
+                padding: var(--thinking-button-expanded-padding);
+                border-radius: 12px;
+            }
+             .thinking-container.collapsed .thinking-process {
+                padding: 0 var(--thinking-button-expanded-padding);
+            }
+        }
 
 /* Style the tooltip text */
 .tooltip-text {
     visibility: hidden; /* Hidden by default */
     width: auto; /* Allow width to adjust based on content */
-    min-width: 100px;  /* Set a minimum width */
-    max-width: 200px;  /* Limit the maximum width */
+    min-width: 80px;  /* Set a minimum width */
+    max-width: 180px;  /* Limit the maximum width */
     background-color: #333; /* Dark background for the bubble */
     color: #fff;
-    font-size: 14px; /* Font size for the tooltip */
+    font-size: 12px; /* Font size for the tooltip */
     text-align: center;
-    border-radius: 20px; /* Bubble shape with rounded corners */
-    padding: 10px;
+    border-radius: 15px; /* Bubble shape with rounded corners */
+    padding: 6px 10px;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%) translateX(20px);  /* Default position to the right of the button, with initial x offset */
+    transform: translateY(-50%) translateX(15px);  /* Default position to the right of the button */
     opacity: 0;  /* Initially hidden */
-     transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* Smooth slide and fade transition */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Subtle shadow for depth */
+     transition: opacity 0.25s ease-in-out, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);  /* Bouncy transition */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);  /* Subtle shadow for depth */
     z-index: 1; /* Ensure it appears above other elements */
-    padding: 8px 12px;
-    line-height: 1.5; /* Improve readability */
-    left: 110%; /* Default position to the right of the button, adjusted for closer active state */
+    line-height: 1.3; /* Improve readability */
+    left: 105%; /* Default position to the right of the button */
 }
 
 /* Tooltip Arrow */
@@ -825,9 +851,9 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: -10px;  /* Position the arrow to the left of the tooltip */
+    left: -8px;  /* Position the arrow to the left of the tooltip */
     transform: translateY(-50%);
-    border-width: 6px;
+    border-width: 5px;
     border-style: solid;
     border-color: transparent #333 transparent transparent; /* Make the arrow */
 }
@@ -843,15 +869,15 @@
 .tooltip-text.tooltip-active {
     visibility: visible;
     opacity: 1;
-    transform: translateY(-50%) translateX(-10px); /* Slide in closer */
+    transform: translateY(-50%) translateX(-8px); /* Slide in closer */
     border: 1px solid #76B900; /* Green border */
 }
 
 /* Add this CSS rule for the fade-out animation */
 .tooltip-text.tooltip-fade-out {
     opacity: 0;
-    transform: translateY(-50%) translateX(20px); /* Ensure it moves back to the original hidden position */
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-50%) translateX(15px); /* Ensure it moves back to the original hidden position */
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
         /* ===================================== */
@@ -862,15 +888,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, calc(-50% + 100vh));
-    width: 90%;
-    max-width: 500px;
+    width: 85%; /* Slightly smaller default width */
+    max-width: 450px;
     background-color: #202124;
     color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* More subtle shadow */
     overflow: hidden;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     z-index: 10;
     pointer-events: none;
@@ -891,7 +917,7 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 5;
 }
@@ -901,13 +927,8 @@
     pointer-events: auto;
 }
 
-        #cardContainer.open {
-            transform: translate(-50%, -50%);
-            opacity: 1;
-        }
-
         .card-content {
-            padding: 20px;
+            padding: 15px; /* Reduced padding */
             position: relative;
             display: flex;
             flex-direction: column;
@@ -916,45 +937,46 @@
         .top-bar {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced margin */
         }
 
         .top-bar img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            opacity: 0.8;
         }
 
         .title {
-            font-size: 20px; /* Adjusted font size for responsiveness */
+            font-size: 18px;
             font-weight: bold;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .description {
-            font-size: 14px; /* Adjusted font size for responsiveness */
+            font-size: 13px;
             color: #9aa0a6;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            transition: opacity 0.3s ease;
+            line-height: 1.3;
+            margin-bottom: 15px; /* Reduced margin */
+            transition: opacity 0.2s ease-in-out;
         }
 
         .navigation {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
+            margin-top: 10px; /* Reduced margin */
         }
 
         .nav-button {
             background: none;
             border: none;
             color: #9aa0a6;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             outline: none;
-            padding: 5px;
-            transition: color 0.2s ease;
+            padding: 4px;
+            transition: color 0.15s ease-in-out;
         }
 
         .nav-button:hover {
@@ -963,33 +985,34 @@
 
         .pagination {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background-color: #9aa0a6;
             border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
         }
 
         .dot.active {
             background-color: white;
+            transform: scale(1.1);
         }
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 8px;
+            right: 8px;
             background: none;
             border: none;
             color: #9aa0a6;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.2s ease, color 0.2s ease;
-            padding: 5px;
+            opacity: 0.6;
+            transition: opacity 0.15s ease-in-out, color 0.15s ease-in-out;
+            padding: 4px;
             line-height: 1;
         }
 
@@ -998,32 +1021,22 @@
             color: white;
         }
 
-
         /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 18px;
-            }
-            .description {
-                font-size: 13px;
-            }
-            .card-content {
-                padding: 15px;
-            }
-            .top-bar {
-                margin-bottom: 10px;
-            }
-        }
-
-        @media (max-width: 576px) {
+        @media (max-width: 600px) {
             .title {
                 font-size: 16px;
             }
             .description {
                 font-size: 12px;
             }
+            .card-content {
+                padding: 12px;
+            }
+            .top-bar {
+                margin-bottom: 8px;
+            }
             .nav-button {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
@@ -1172,7 +1185,6 @@ const cardTexts = [
     "GEN-T V2.0 is ready to tackle anything you throw its way. We hope you find this model both incredibly helpful and entertaining."
 ];
 
-
         let currentTextIndex = 0;
 
         function updateCardText() {
@@ -1180,7 +1192,7 @@ const cardTexts = [
             setTimeout(() => {
                 descriptionElement.textContent = cardTexts[currentTextIndex];
                 descriptionElement.style.opacity = 1; // Fade in
-            }, 300); // Match the opacity transition time
+            }, 200); // Match the opacity transition time
             updatePagination();
         }
 
@@ -1208,14 +1220,14 @@ function openCard() {
 function closeCard() {
     cardContainer.classList.remove('open');
     overlay.classList.remove('show');
-    
+
     // Wait for the transition to complete before hiding elements
     setTimeout(() => {
         if (!cardContainer.classList.contains('open')) {
             cardContainer.style.display = 'none';
             overlay.style.display = 'none';
         }
-    }, 600); // Match the transition duration (0.6s = 600ms)
+    }, 500); // Match the transition duration (0.5s = 500ms)
 }
 
 // Update event listeners
@@ -1233,7 +1245,7 @@ document.addEventListener('keydown', (e) => {
 // Helper Functions
 function autoResize(element) {
     element.style.height = 'auto';
-    const newHeight = Math.min(element.scrollHeight, 200);
+    const newHeight = Math.min(element.scrollHeight, 150);
     element.style.height = newHeight + 'px';
 }
 
@@ -1579,7 +1591,7 @@ mainSidebarToggle.addEventListener('click', () => {
         tooltip.classList.add('tooltip-fade-out');
         setTimeout(() => {
           tooltip.classList.remove('tooltip-active', 'tooltip-fade-out');
-        }, 300); // Match the transition duration
+        }, 200); // Match the transition duration
       }
     });
   } else {
@@ -1600,39 +1612,39 @@ if (sidebarButtonInside) {
         closeCardBtn.addEventListener('click', closeCard);
          overlay.addEventListener('click', closeCard);
 
-        prevBtn.addEventListener('click', () => {
-            currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
-            updateCardText();
-        });
+    prevBtn.addEventListener('click', () => {
+        currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
+        updateCardText();
+    });
 
-        nextBtn.addEventListener('click', () => {
-            currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
-            updateCardText();
-        });
+    nextBtn.addEventListener('click', () => {
+        currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
+        updateCardText();
+    });
 
-        document.addEventListener('keydown', function(event) {
-            if (cardContainer.classList.contains('open')) {
-                if (event.key === 'ArrowLeft') {
-                    currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
-                    updateCardText();
-                } else if (event.key === 'ArrowRight') {
-                    currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
-                    updateCardText();
-                }
+    document.addEventListener('keydown', function(event) {
+        if (cardContainer.classList.contains('open')) {
+            if (event.key === 'ArrowLeft') {
+                currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
+                updateCardText();
+            } else if (event.key === 'ArrowRight') {
+                currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
+                updateCardText();
             }
-        });
+        }
+    });
 
-        updateCardText(); // Initialize the card text
+    updateCardText(); // Initialize the card text
 // Get all sidebar buttons EXCEPT the main toggle
 const sidebarButtons = document.querySelectorAll('.sidebar .sidebar-btn:not(#main-sidebar-toggle)');
 
 // Add click event listener to each sidebar button
 sidebarButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        if (sidebar.classList.contains('open')) {
-           sidebar.classList.remove('open');
-        }
-    });
+button.addEventListener('click', () => {
+if (sidebar.classList.contains('open')) {
+sidebar.classList.remove('open');
+}
+});
 });
 
 // Event listeners for the remaining sidebar buttons (replace with your desired functionality)
@@ -1642,29 +1654,28 @@ const refreshButton = document.querySelector('.sidebar-bottom button:nth-child(3
 const settingsButton = document.querySelector('.sidebar-bottom button:nth-child(4)');
 
 heartButton.addEventListener('click', () => {
-    console.log('Heart button clicked');
-    // Add your functionality for the heart button here
+console.log('Heart button clicked');
+// Add your functionality for the heart button here
 });
 
 questionButton.addEventListener('click', () => {
-    console.log('Question button clicked');
-    // Add your functionality for the question button here
+console.log('Question button clicked');
+// Add your functionality for the question button here
 });
 
 refreshButton.addEventListener('click', () => {
-    console.log('Refresh button clicked');
-    // Add your functionality for the refresh button here, potentially clearing the chat
-    startNewChat(); // Example: clear chat on refresh
+console.log('Refresh button clicked');
+// Add your functionality for the refresh button here, potentially clearing the chat
+startNewChat(); // Example: clear chat on refresh
 });
 
 settingsButton.addEventListener('click', () => {
-    console.log('Settings button clicked');
-    // Add your functionality for the settings button here
+console.log('Settings button clicked');
+// Add your functionality for the settings button here
 });
 
-  // Ensure card is closed initially
-    cardContainer.style.display = 'none';
-
-    </script>
+// Ensure card is closed initially
+cardContainer.style.display = 'none';
+</script>
 </body>
 </html>
