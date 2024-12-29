@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>GEN-T V2.0</title>
     <style>
         /* ===================================== */
@@ -247,6 +247,7 @@
             padding: 2rem 0;
             scroll-behavior: smooth;
             background: #000;
+            transition: padding-bottom 0.3s ease; /* Add transition for smooth adjustment */
         }
 
         @media (max-width: 768px) {
@@ -419,6 +420,8 @@
             background: #0a0a0a;
             backdrop-filter: blur(20px);
              border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: padding 0.3s ease, border-radius 0.3s ease, position 0.3s ease, top 0.3s ease;
+            will-change: padding, border-radius, position, top;
         }
 
         @media (min-width: 769px) {
@@ -432,6 +435,13 @@
                 padding: 1rem;
                 position: fixed; /* Fix input container to the bottom on mobile */
                 z-index: 200; /* Ensure it's above the chat content */
+                border-radius: 0;
+            }
+
+            .input-container.focused {
+                padding: 1.5rem;
+                border-radius: 0;
+                top: 0;
             }
         }
 
@@ -458,6 +468,7 @@
             transition: all 0.3s ease;
             max-height: 200px;
             min-height: 60px;
+            will-change: border-color, background;
         }
         .chat-input:focus {
             border-color: var(--accent-color);
@@ -478,6 +489,7 @@
             flex-shrink: 0;
             position: relative;
             margin-bottom: 0;
+            will-change: background, transform;
         }
 
         .send-button:hover {
@@ -511,6 +523,7 @@
             flex-shrink: 0;
             margin-bottom: 0;
             outline: none;
+            will-change: background, transform;
         }
 
         .voice-button:hover {
@@ -1230,6 +1243,8 @@ const voiceModeIndicator = document.getElementById('voice-mode-indicator');
 const headerTitle = document.getElementById('header-title');
 const mainSidebarToggle = document.getElementById('main-sidebar-toggle');
 const tooltipTargets = document.querySelectorAll('.tooltip-target');
+const inputContainer = document.querySelector('.input-container'); // Get the input container
+const chatWrapper = document.querySelector('.chat-wrapper'); // Get the chat wrapper
 let chatHistory = [];
 let isVoiceActive = false;
 let recognition = null;
@@ -1609,6 +1624,21 @@ voiceButton.addEventListener('click', () => {
 
 // Event Listeners
 textarea.addEventListener('input', () => autoResize(textarea));
+textarea.addEventListener('focus', () => {
+    if (window.innerWidth <= 768) {
+        inputContainer.classList.add('focused');
+        chatWrapper.style.paddingBottom = 'calc(100vh - 76px)'; // Adjust based on focused input height
+        scrollToBottom(); // Keep the latest messages visible
+    }
+});
+
+textarea.addEventListener('blur', () => {
+    if (window.innerWidth <= 768) {
+        inputContainer.classList.remove('focused');
+        chatWrapper.style.paddingBottom = '5rem'; // Restore default padding
+    }
+});
+
 textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -1727,29 +1757,54 @@ const refreshButton = document.querySelector('.sidebar-bottom button:nth-child(3
 const settingsButton = document.querySelector('.sidebar-bottom button:nth-child(4)');
 
 heartButton.addEventListener('click', () => {
-    console.log('Heart button clicked');
-    // Add your functionality for the heart button here
+console.log('Heart button clicked');
+// Add your functionality for the heart button here
 });
 
 questionButton.addEventListener('click', () => {
-    console.log('Question button clicked');
-    // Add your functionality for the question button here
+console.log('Question button clicked');
+// Add your functionality for the question button here
 });
 
 refreshButton.addEventListener('click', () => {
-    console.log('Refresh button clicked');
-    // Add your functionality for the refresh button here, potentially clearing the chat
-    startNewChat(); // Example: clear chat on refresh
+console.log('Refresh button clicked');
+// Add your functionality for the refresh button here, potentially clearing the chat
+startNewChat(); // Example: clear chat on refresh
 });
 
 settingsButton.addEventListener('click', () => {
-    console.log('Settings button clicked');
-    // Add your functionality for the settings button here
+console.log('Settings button clicked');
+// Add your functionality for the settings button here
 });
 
-  // Ensure card is closed initially
-    cardContainer.style.display = 'none';
+// Ensure card is closed initially
+cardContainer.style.display = 'none';
 
-    </script>
+// Function to debounce calls for resize events
+function debounce(func, delay) {
+let timeoutId;
+return function(...args) {
+clearTimeout(timeoutId);
+timeoutId = setTimeout(() => {
+func.apply(this, args);
+}, delay);
+};
+}
+// Handle keyboard visibility on mobile
+const handleResize = () => {
+if (window.innerWidth <= 768 && textarea === document.activeElement) {
+inputContainer.classList.add('focused');
+chatWrapper.style.paddingBottom = 'calc(100vh - 76px)';
+scrollToBottom();
+} else if (window.innerWidth <= 768 && textarea !== document.activeElement){
+inputContainer.classList.remove('focused');
+chatWrapper.style.paddingBottom = '5rem';
+}
+};
+// Debounce the handleResize function
+const debouncedResize = debounce(handleResize, 100);
+window.addEventListener('resize', debouncedResize);
+</script>
+
 </body>
 </html>
