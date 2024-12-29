@@ -1,197 +1,1669 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerminator Edits</title>
-    <link rel="stylesheet" href="5743478141.css">
-  </head>
-  <body>
-    <header>
-      <a href="index.html">
-        <div class="logo">jerminator</div>
-      </a>
-      <nav>
-        <div class="burger-menu">
-          <div class="burger-bar"></div>
-          <div class="burger-bar2"></div>
-          <div class="burger-bar3"></div>
-        </div>
-        <ul class="nav-menu">
-          <li>
-            <a href="#work">Work</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#highlights">Highlights</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section class="hero" id="home">
-        <img src="underwater-background.webp" alt="Underwater scene" class="hero-background">
-        <div class="hero-content">
-          <h1>video editor</h1>
-          <p>I'm a self-taught professional video editor, who loves being fun and making content, fun.</p>
-          <div class="cta-buttons">
-            <a href="index.html#contact">
-              <button class="cta-button">Get in touch</button>
-            </a>
-            <a href="index.html#highlights">
-              <button class="cta-button">Portfolio Highlights</button>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section class="about-section section" id="about">
-        <div class="stats-container">
-          <div class="stat-item">
-            <div class="stat-number">After Effects</div>
-            <div class="stat-label">Peak Expertise</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">Premiere Pro</div>
-            <div class="stat-label">Fairly Proficient</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">Photoshop</div>
-            <div class="stat-label">Considerably Competent</div>
-          </div>
-        </div>
-        <div class="about-content">
-          <p>I am a self-taught video editor known for introducing innovative editing styles that create new trends in content creation. I think I kicked off my journey back in 2018, since then I was super passionate to turn regular videos into cool, engaging stories. I've had an amazing stroke of luck; over almost a decade, and great feedbacks from my clients has just continued to drive my love for the work. I use Adobe After Effects for most of the edits I do as I believe it is the leading software for creating fantastic visual effects, lively 2D and text animation, complex compositing, tasteful motion graphics, and pinpoint video stabilization. I do multi-camera editing, and with Adobe Premiere Pro, there's also the playing around with audio editing and colour correction. This is to ensure that small parts of the video are accorded serious attention and precision.</p>
-          <p>Advanced compositing, motion tracking, color grading, rotoscoping, 2D animation integration, visual effects, and sophisticated transitions are among my areas of expertise. Having these skills allows me to bring to life any idea no matter how complex it might be.</p>
-          <p>What really matters in this line of work to me is creativity. I really try to look for new styles of edit which would catch anybody's interest. My goal is to create videos that leave viewers in awe and linger in their thoughts. My process heavily relies on keeping open communication and actually understanding what my clients are trying to achieve. Teamwork that ensures the final product really captures the client's vibe and message. I am all about learning new skills, staying current on what's hot in video editing, so I can provide my clients with a stellar experience.</p>
-        </div>
-      </section>
-      <section class="work-section" id="work">
-        <h2>Work</h2>
-        <div class="work-grid">
-          <div class="work-item">
-            <a href="#highlights">
-              <img src="d.png" alt="Films showcase">
-            </a>
-            <div class="work-info">
-              <h3>Editor's Touch</h3>
-              <p>Explore a selection of my top projects to evaluate my expertise and capabilities in video editing and production.</p>
+    <title>GEN-T V2.0</title>
+    <style>
+        /* ===================================== */
+        /*            General Styles             */
+        /* ===================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --sidebar-width: 72px;
+            --primary-gradient: linear-gradient(180deg, #3a3a3a, #3a3a3a); /* Pure black */
+            --secondary-gradient: linear-gradient(135deg, #000, #3a3a3a); /* Pure black */
+            --accent-color: #76B900;
+             --hover-color: rgba(118, 185, 0, 0.8); /* Slightly darker green with some transparency for hover */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --thinking-bg: #1a1a1a; /* Dark grey for thinking background */
+            --thinking-transition-duration: 0.4s;
+            --thinking-button-height: 100px;
+            --thinking-button-expanded-padding: 1.5rem;
+            --voice-button-size: 60px;
+            --accent-color-rgb: 118, 185, 0; /* RGB value for box-shadow */
+        }
+
+        body {
+            background: linear-gradient(180deg, #0a0a0a, #1a1a1a); /* Very dark gradient, not pure black */
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+            transition: filter 0.3s ease;
+        }
+
+        body.blur {
+            filter: blur(5px);
+        }
+
+        /* ===================================== */
+        /*               Sidebar                 */
+        /* ===================================== */
+        @media (min-width: 769px) {
+            .sidebar {
+                width: var(--sidebar-width);
+                background: var(--secondary-gradient);
+                padding: 1.5rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                 border-right: 1px solid rgba(255, 255, 255, 0.1);
+                position: fixed;
+                height: 100vh;
+                z-index: 100;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: var(--sidebar-width);
+                width: calc(100% - var(--sidebar-width));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: var(--sidebar-width);
+                background: var(--secondary-gradient);
+                padding: 1.5rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                 border-right: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 1000;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .header .sidebar-toggle-btn {
+                display: flex;
+            }
+        }
+
+        .sidebar-top {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .sidebar-bottom {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .sidebar-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 24px;
+        }
+
+        .sidebar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 2px solid #000000;
+        }
+          /* ===================================== */
+        /*            Main Content Area            */
+        /* ===================================== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            transition: margin-left 0.3s ease-in-out;
+        }
+          /* ===================================== */
+        /*               Header                   */
+        /* ===================================== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            background: var(--secondary-gradient);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line */
+        }
+
+        .model-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header .sidebar-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 1rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header .sidebar-toggle-btn {
+                display: flex;
+            }
+        }
+
+        .model-selector h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            transition: color 0.3s ease, background-clip 0.3s ease;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            color: var(--text-primary);
+        }
+
+        .model-selector h2.voice-active {
+           background-image: linear-gradient(to right, #76B900, #000000, #76B900); /* Green and black wave */
+            background-size: 200% 100%;
+            animation: wave-text 3s linear infinite;
+        }
+
+        @keyframes wave-text {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .try-advanced {
+            padding: 0.75rem 1.25rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .try-advanced:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+        }
+         /* ===================================== */
+        /*            Chat Container             */
+        /* ===================================== */
+        .chat-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 0;
+            scroll-behavior: smooth;
+            background: #000; /* Dark grey background for chat area */
+        }
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+             background: #000; /* Dark grey background for chat area */
+        }
+         /* ===================================== */
+        /*               Messages                 */
+        /* ===================================== */
+        .message {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding: 1.25rem;
+            border-radius: 16px;
+             background: #242424; /* Dark grey for message bubbles */
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            max-width: 80%;
+        }
+        .message {
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .message.user-message {
+            flex-direction: row-reverse;
+            margin-left: auto;
+            margin-right: 0;
+            background: rgba(0, 0, 0, 0.5); /* Black with some transparency for user message */
+            max-width: fit-content;
+        }
+        .message.ai-message {
+            background: #242424;
+        }
+        .message.user-message .avatar {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+          .message:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+            .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+    .loading-message .avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+        .message-content {
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            word-break: break-word;
+        }
+        .ai-message .message-content ol {
+             padding-left: 20px;
+        }
+        .ai-message .message-content li {
+             margin-left: 10px;
+            padding-left: 5px;
+        }
+             /* ===================================== */
+        /*           Loading Animation           */
+        /* ===================================== */
+        .loading-indicator {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            width: 100%;
+        }
+        .loading-line {
+            height: 14px;
+            background: linear-gradient(to right, #333, var(--text-secondary)); /* Dark grey for loading */
+            border-radius: 7px;
+            overflow: hidden;
+            transform-origin: left center;
+            animation-fill-mode: forwards;
+        }
+
+        .loading-line::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--text-secondary), #444, var(--text-secondary));
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+        .loading-line:nth-child(1) {
+            width: 30%;
+            animation: appear-line 0.8s forwards;
+        }
+        .loading-line:nth-child(1)::before {
+            animation-duration: 2.5s;
+        }
+        .loading-line:nth-child(2) {
+            width: 100%;
+            animation: appear-line 1.1s 0.3s forwards;
+        }
+        .loading-line:nth-child(2)::before {
+            animation-duration: 1.8s;
+        }
+        .loading-line:nth-child(3) {
+            width: 80%;
+            animation: appear-line 0.75s 0.1s forwards;
+        }
+        .loading-line:nth-child(3)::before {
+            animation-duration: 3s;
+        }
+         .loading-line:nth-child(4) {
+            width: 40%;
+            animation: appear-line 1.1s 0.4s forwards;
+        }
+        .loading-line:nth-child(4)::before {
+            animation-duration: 1.6s;
+        }
+         @keyframes appear-line {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+        /* ===================================== */
+        /*               Input Area              */
+        /* ===================================== */
+         .input-container {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: #0a0a0a; /* Very dark grey */
+            backdrop-filter: blur(20px);
+             border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line */
+        }
+
+        @media (min-width: 769px) {
+            .input-container {
+                left: var(--sidebar-width);
+            }
+        }
+
+        .input-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+            max-height: 200px;
+            min-height: 60px;
+        }
+        .chat-input:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .send-button {
+            width: var(--voice-button-size);
+            height: var(--voice-button-size);
+            border-radius: 16px;
+            background: var(--accent-color);
+            border: none;
+            color: black;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .send-button:hover {
+            background: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        .send-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: black;
+            transform: rotate(45deg);
+        }
+
+        /* ===================================== */
+        /*            Voice Button               */
+        /* ===================================== */
+        .voice-button {
+            width: var(--voice-button-size);
+            height: var(--voice-button-size);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-bottom: 0;
+            outline: none;
+        }
+
+        .voice-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .voice-button.active {
+            background: var(--accent-color);
+            color: black;
+            box-shadow: 0 0 0 4px rgba(var(--accent-color-rgb, 118, 185, 0), 0.4);
+        }
+
+        .voice-button.active:hover {
+            background: var(--hover-color);
+        }
+
+        .voice-button svg {
+            width: 24px;
+            height: 24px;
+             stroke: currentColor; /* Inherit color for the voice icon */
+        }
+
+        @keyframes pulse-mic {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .voice-button.listening {
+            animation: pulse-mic 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        /* ===================================== */
+        /*        Voice Mode Indicator         */
+        /* ===================================== */
+        .voice-mode-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-image: linear-gradient(to right, #76B900, #000000, #76B900); /* Green and black wave */
+            background-size: 200% 100%;
+            border-radius: 0 0 10px 10px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+            animation: wave-border 2s linear infinite;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+
+        .voice-mode-indicator.active {
+            opacity: 1;
+        }
+
+        @keyframes wave-border {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+          /* ===================================== */
+        /*             Scrollbar Styling         */
+        /* ===================================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        /* ===================================== */
+        /*         Mobile Responsiveness         */
+        /* ===================================== */
+        @media (max-width: 768px) {
+            :root {
+                --sidebar-width: 60px;
+                --voice-button-size: 50px;
+            }
+
+            .chat-container {
+                padding: 0 1rem;
+            }
+            .input-container {
+                padding: 1rem;
+            }
+            .sidebar-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+           .message {
+                flex-direction: row;
+                align-items: flex-start;
+                max-width: 90%;
+            }
+            .message.user-message {
+                flex-direction: row-reverse;
+                align-items: flex-start;
+                margin-left: auto;
+                margin-right: 1rem;
+                max-width: 80%;
+            }
+            .avatar {
+                margin-bottom: 0;
+            }
+            .message.user-message .avatar {
+                margin-bottom: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .message-content {
+                width: auto;
+            }
+
+            .voice-button {
+                font-size: 20px;
+            }
+             .send-button {
+                width: var(--voice-button-size);
+                height: var(--voice-button-size);
+            }
+        }
+        /* ===================================== */
+        /*         Thinking Button Styling       */
+        /* ===================================== */
+         .thinking-container {
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: height var(--thinking-transition-duration) ease-in-out;
+        }
+
+        .thinking-container.collapsed {
+            height: var(--thinking-button-height);
+        }
+
+        .thinking-container.expanded {
+            height: auto;
+        }
+
+        .thinking-button {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+             background: linear-gradient(135deg, #000000, var(--accent-color)); /* Black and green gradient */
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: left;
+            position: relative;
+            height: var(--thinking-button-height);
+            overflow: hidden;
+        }
+
+        .thinking-button:hover {
+            background: linear-gradient(135deg, #1a1a1a, var(--hover-color));
+        }
+
+        .thinking-button:active {
+            transform: scale(0.98);
+        }
+        .thinking-button-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+       .thinking-button-title {
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-right: 0.75rem;
+            line-height: 1.1;
+            transition: font-size 0.3s ease, background-position 1.5s linear;
+           background-image: linear-gradient(to right, #ffffff, #76B900, #ffffff); /* White and green hint in title */
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-right: 0.1em;
+            padding-bottom: 0.05em;
+        }
+
+        .thinking-button:hover .thinking-button-title {
+            font-size: 1.2rem;
+             background-position: 200% 0;
+        }
+
+         .thinking-button-dots {
+            display: flex;
+            gap: 0.4rem;
+            line-height: 1.1;
+        }
+        .thinking-button-dot {
+             width: 10px;
+            height: 10px;
+             border-radius: 50%;
+             background-color: #fff; /* Green dots */
+             border: 2px solid black; /* Added black border */
+             animation: pulse-dot 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        .thinking-button-dot:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        .thinking-button-dot:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                transform: scale(0.9);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .thinking-button-right {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+           transform: translateY(-50%);
+        }
+
+        .thinking-button-arrow {
+            font-size: 1rem;
+            color: var(--text-secondary);
+             transition: transform var(--thinking-transition-duration) ease-in-out;
+             transform: translateY(1px);
+        }
+
+        .thinking-button-arrow.open {
+            transform: rotate(180deg) translateY(1px);
+        }
+
+       .thinking-expand-text {
+          font-size: 0.9rem;
+         color: var(--text-secondary);
+         position: absolute;
+           left: 2rem;
+            bottom: 1rem;
+           transition: color var(--thinking-transition-duration) ease-in-out, left var(--thinking-transition-duration) ease-in-out, bottom var(--thinking-transition-duration) ease-in-out;
+        }
+
+        .thinking-container.expanded .thinking-expand-text {
+           /* transition: opacity var(--thinking-transition-duration) ease-in-out, transform var(--thinking-transition-duration) ease-in-out; */
+        }
+        .thinking-process {
+            margin-top: 0.5rem;
+            padding: var(--thinking-button-expanded-padding);
+            background-color: var(--thinking-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            overflow-x: auto;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: opacity var(--thinking-transition-duration) ease-in-out, transform var(--thinking-transition-duration) ease--out, padding var(--thinking-transition-duration) ease-in-out;
+        }
+
+        .thinking-container.expanded .thinking-process {
+            opacity: 1;
+            transform: translateY(0);
+        }
+         .thinking-container.collapsed .thinking-process {
+            padding: 0 var(--thinking-button-expanded-padding);
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+             margin-top: 0;
+        }
+
+/* Style the tooltip text */
+.tooltip-text {
+    visibility: hidden; /* Hidden by default */
+    width: auto; /* Allow width to adjust based on content */
+    min-width: 100px;  /* Set a minimum width */
+    max-width: 200px;  /* Limit the maximum width */
+    background-color: #333; /* Dark background for the bubble */
+    color: #fff;
+    font-size: 14px; /* Font size for the tooltip */
+    text-align: center;
+    border-radius: 20px; /* Bubble shape with rounded corners */
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(20px);  /* Default position to the right of the button, with initial x offset */
+    opacity: 0;  /* Initially hidden */
+     transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* Smooth slide and fade transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Subtle shadow for depth */
+    z-index: 1; /* Ensure it appears above other elements */
+    padding: 8px 12px;
+    line-height: 1.5; /* Improve readability */
+    left: 110%; /* Default position to the right of the button, adjusted for closer active state */
+}
+
+/* Tooltip Arrow */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;  /* Position the arrow to the left of the tooltip */
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #333 transparent transparent; /* Make the arrow */
+}
+
+/* Show the tooltip when hovering over the button (only if not active) */
+.sidebar-btn:hover .tooltip-text:not(.tooltip-active) {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05) translateX(0);
+}
+
+/* Active tooltip style (triggered by sidebar button click) */
+.tooltip-text.tooltip-active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%) translateX(-10px); /* Slide in closer */
+    border: 1px solid #76B900; /* Green border */
+}
+
+/* Add this CSS rule for the fade-out animation */
+.tooltip-text.tooltip-fade-out {
+    opacity: 0;
+    transform: translateY(-50%) translateX(20px); /* Ensure it moves back to the original hidden position */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+        /* ===================================== */
+        /*              Card Styling             */
+        /* ===================================== */
+#cardContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 100vh));
+    width: 90%;
+    max-width: 500px;
+    background-color: #202124;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#cardContainer.open {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Add overlay transition */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 5;
+}
+
+#overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+        #cardContainer.open {
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .top-bar img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .title {
+            font-size: 20px; /* Adjusted font size for responsiveness */
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 14px; /* Adjusted font size for responsiveness */
+            color: #9aa0a6;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            color: #9aa0a6;
+            font-size: 20px;
+            cursor: pointer;
+            outline: none;
+            padding: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-button:hover {
+            color: white;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #9aa0a6;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #9aa0a6;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.2s ease;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            color: white;
+        }
+
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 18px;
+            }
+            .description {
+                font-size: 13px;
+            }
+            .card-content {
+                padding: 15px;
+            }
+            .top-bar {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .title {
+                font-size: 16px;
+            }
+            .description {
+                font-size: 12px;
+            }
+            .nav-button {
+                font-size: 18px;
+            }
+        }
+
+    .no-decoration {
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <!-- Sidebar Top Section -->
+    <div class="sidebar-top">
+        <!-- Menu Button -->
+        <button class="sidebar-btn" id="main-sidebar-toggle">☰</button>
+
+        <!-- New Chat Button with Tooltip -->
+        <button class="sidebar-btn tooltip-target" id="new-chat-btn">
+            +
+            <span class="tooltip-text">New Chat</span>
+        </button>
+    </div>
+
+    <!-- Sidebar Bottom Section -->
+    <div class="sidebar-bottom">
+        <!-- Help & Feedback Button with Notification Dot and Tooltip -->
+        <button class="sidebar-btn tooltip-target" id="help-feedback-btn">
+            ?
+            <span class="notification-dot"></span>
+            <span class="tooltip-text">What's New?</span>
+        </button>
+
+        <!-- Retry Output Button with Tooltip -->
+        <button class="sidebar-btn tooltip-target">
+            ↻
+            <span class="tooltip-text">Retry Output</span>
+        </button>
+
+        <!-- Profile & Settings Button with Tooltip -->
+        <button class="sidebar-btn tooltip-target">
+            ⚙️
+                        <span class="tooltip-text">Profile & Settings</span>
+        </button>
+    </div>
+</nav>
+    <main class="main-content">
+        <header class="header">
+            <button class="sidebar-toggle-btn">☰</button>
+            <div class="model-selector">
+                <h2 id="header-title">GEN-T V2.0</h2>
             </div>
-          </div>
-          <div class="work-item">
-            <a href="https://www.youtube.com/@TheJerminator/shorts">
-              <img src="c.png" alt="short edits">
-            </a>
-            <div class="work-info">
-              <h3>Short Edits</h3>
-              <p>Short edits are an easy way to determine whether someone is a good editor or not, thus feel free to see if my editing style matches your taste.</p>
+             <button class="try-advanced" style="background-color: #76B900; border-color: rgba(255, 255, 255, 0.2);">
+                ✨ Genius
+            </button>
+        </header>
+        <div class="chat-wrapper">
+            <div class="chat-container" id="chat-container">
+                <div class="message ai-message">
+                    <div class="avatar">S</div>
+                    <div class="message-content">
+                        Hi there! How can I help you today?
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-      <section class="showcase-section section" id="highlights">
-        <div class="showcase-item">
-          <div class="showcase-content">
-            <h2>Video Editor | Showreel</h2>
-            <p>This is a showreel project I put together a while back to explore a portion of my skills. It wasn’t created for professional purposes or financial gain, just as a personal experiment. I spent about a day working on it, and while it may not reflect my absolute best work, it should give a good idea of what I do. I believe the video should provide a sense of my proficiency in color correction, video stabilization, motion graphics, text animation integration, and overall video styling.</p>
-          </div>
-          <div class="showcase-media">
-            <img src="a.png" alt="Video Editor | Showreel">
-            <div class="play-button" data-video-url="https://youtu.be/SiosMksMw2Q?si=17gfEypiPCp71CwI"></div>
-          </div>
+        <div class="input-container">
+            <div class="input-wrapper">
+                <button class="voice-button" id="voice-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2c0 3.5-2.5 6.5-6 7v0"></path>
+                        <path d="M5 10v2c0 3.5 2.5 6.5 6 7v0"></path>
+                    </svg>
+                </button>
+                <textarea class="chat-input" placeholder="Message GEN-T..." rows="1"></textarea>
+                <button class="send-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="showcase-item">
-          <div class="showcase-content">
-            <h2>High Beat | Car Edit</h2>
-            <p>What's a video editor if even a car edit that stands out is above their level of editing? This video presents humor at first, having lots of advanced transitions from relaxed to intense on quite an energetic beat. The edit is quite short but clearly shows you what I'm capable of doing with transitions, color grading, motion graphics, animations, and significantly fancy video effects. Hope you are fascinated.</p>
-          </div>
-          <div class="showcase-media">
-            <img src="b.jpeg" alt="Car Edit">
-            <div class="play-button" data-video-url="https://youtu.be/x4ycb8X4ZJc"></div>
-          </div>
+        <div class="voice-mode-indicator" id="voice-mode-indicator"></div>
+        <div id="cardContainer">
+        <div class="card-content">
+            <button class="close-btn" id="closeCardBtn">×</button>
+            <div class="top-bar">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAqADAAQAAAABAAAAAgAAAAA0hc+jAAAAEklEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Google Icon">
+                <div class="title">What's New?</div>
+            </div>
+            <div class="description">GEN-T has gotten a lot smarter than you think. It now has a lot more features than you can imagine.</div>
+            <div class="navigation">
+                <button class="nav-button" id="prevBtn"><</button>
+                <div class="pagination">
+                    <div class="dot active" data-index="0"></div>
+                    <div class="dot" data-index="1"></div>
+                    <div class="dot" data-index="2"></div>
+                    <div class="dot" data-index="3"></div>
+                    <div class="dot" data-index="4"></div>
+                </div>
+                <button class="nav-button" id="nextBtn">></button>
+            </div>
         </div>
-        <div class="showcase-item">
-          <div class="showcase-content">
-            <h2>Romantic Monke</h2>
-            <p>Well uh this is one of the edits that I made purely for fun, when I was bored, but turned out to be a great example to showcase my skills. Take it easy, enjoy the monke edit.</p>
-          </div>
-          <div class="showcase-media">
-            <img src="a.png" alt="Video Editor | Showreel">
-            <div class="play-button" data-video-url="https://youtu.be/SiosMksMw2Q?si=17gfEypiPCp71CwI"></div>
-          </div>
+    </div>
+
+    <div id="overlay"></div>
+
+<script>
+// DOM Elements
+const sidebar = document.querySelector('.sidebar');
+const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
+const mainContent = document.querySelector('.main-content');
+const mainContentWrapper = document.querySelector('.main-content-wrapper');
+const textarea = document.querySelector('.chat-input');
+const sendButton = document.querySelector('.send-button');
+const chatContainer = document.querySelector('#chat-container');
+const voiceButton = document.getElementById('voice-button');
+const voiceModeIndicator = document.getElementById('voice-mode-indicator');
+const headerTitle = document.getElementById('header-title');
+const mainSidebarToggle = document.getElementById('main-sidebar-toggle');
+const tooltipTargets = document.querySelectorAll('.tooltip-target');
+let chatHistory = [];
+let isVoiceActive = false;
+let recognition = null;
+// let silenceTimer; // REMOVE or COMMENT OUT
+let autoRestartVoiceTimeout;
+const SILENCE_DELAY = 1500; // 1.5 seconds of silence to trigger send
+const AUTO_RESTART_DELAY = 3000; // 3 seconds before voice mode restarts
+let voiceModeManuallyEnabled = false; // Track if voice mode was explicitly enabled
+let tooltipsActive = false;
+
+        // Card Elements
+        const cardContainer = document.getElementById('cardContainer');
+        const overlay = document.getElementById('overlay');
+        const descriptionElement = document.querySelector('#cardContainer .description');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const closeCardBtn = document.getElementById('closeCardBtn');
+        const dots = document.querySelectorAll('#cardContainer .pagination .dot');
+    const helpFeedbackBtn = document.getElementById('help-feedback-btn'); // Get help and feedback button
+
+const cardTexts = [
+    "GEN-T has become more intelligent and capable than ever before, packed with features beyond what you could imagine.",
+    "• Introducing GEN-T V2.0, our fastest and most intelligent model yet, designed to tackle tasks demanding advanced reasoning with ease.",
+    "• GEN-T V2.0 employs a sophisticated chain-of-thought process, enabling the model to 'think' through questions before responding, ensuring highly accurate and well-reasoned answers.",
+    "• GEN-T V2.0 now features Voice Mode, live web search, and a chain-of-thought process, all working seamlessly together while maintaining peak efficiency.",
+    "GEN-T V2.0 is ready to tackle anything you throw its way. We hope you find this model both incredibly helpful and entertaining."
+];
+
+
+        let currentTextIndex = 0;
+
+        function updateCardText() {
+            descriptionElement.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                descriptionElement.textContent = cardTexts[currentTextIndex];
+                descriptionElement.style.opacity = 1; // Fade in
+            }, 300); // Match the opacity transition time
+            updatePagination();
+        }
+
+        function updatePagination() {
+            dots.forEach((dot, index) => {
+                if (index === currentTextIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+/* Update the JavaScript functions */
+function openCard() {
+    cardContainer.style.display = 'block';
+    // Force a reflow before adding the open class
+    cardContainer.offsetHeight;
+    cardContainer.classList.add('open');
+    overlay.style.display = 'block';
+    overlay.offsetHeight; // Force a reflow
+    overlay.classList.add('show');
+}
+
+function closeCard() {
+    cardContainer.classList.remove('open');
+    overlay.classList.remove('show');
+    
+    // Wait for the transition to complete before hiding elements
+    setTimeout(() => {
+        if (!cardContainer.classList.contains('open')) {
+            cardContainer.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    }, 600); // Match the transition duration (0.6s = 600ms)
+}
+
+// Update event listeners
+helpFeedbackBtn.addEventListener('click', openCard);
+closeCardBtn.addEventListener('click', closeCard);
+overlay.addEventListener('click', closeCard);
+
+// Add escape key handler
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cardContainer.classList.contains('open')) {
+        closeCard();
+    }
+});
+
+// Helper Functions
+function autoResize(element) {
+    element.style.height = 'auto';
+    const newHeight = Math.min(element.scrollHeight, 200);
+    element.style.height = newHeight + 'px';
+}
+
+function escapeHTML(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function scrollToBottom() {
+   const chatWrapper = document.querySelector('.chat-wrapper');
+   const lastMessage = chatContainer.lastElementChild;
+   if (lastMessage) {
+        lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+   }
+}
+
+function setInputState(disabled) {
+    textarea.disabled = disabled;
+    sendButton.disabled = disabled;
+    voiceButton.disabled = disabled;
+}
+
+// Message Display Functions
+function displayUserMessage(content) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message user-message';
+    messageDiv.innerHTML = `
+        <div class="avatar">U</div>
+        <div class="message-content">${escapeHTML(content)}</div>
+    `;
+    chatContainer.appendChild(messageDiv);
+    scrollToBottom();
+}
+
+function displayLoadingAnimation() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'message ai-message loading-message';
+    loadingDiv.innerHTML = `
+        <div class="avatar">C</div>
+        <div class="message-content">
+            <div class="loading-indicator">
+                <div class="loading-line"></div>
+                <div class="loading-line"></div>
+                <div class="loading-line"></div>
+                <div class="loading-line"></div>
+            </div>
         </div>
-        <div id="videoModal" class="modal">
-          <span class="close">&times;</span>
-          <div class="modal-content">
-            <iframe class="youtube-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+    `;
+    chatContainer.appendChild(loadingDiv);
+    scrollToBottom();
+}
+
+function removeLoadingAnimation() {
+    const loadingMessage = chatContainer.querySelector('.loading-message');
+    if (loadingMessage) {
+        loadingMessage.remove();
+    }
+}
+
+function formatThoughtProcess(thoughtProcess) {
+    thoughtProcess = thoughtProcess
+        .replace("Analyze the user's message and describe your understanding of it.", "Analyzing the user's message")
+        .replace("Assistant's Internal Thought Process:", "Internal Thinking:")
+        .replace("Assistant's Reply:", "Possible response to the user's prompt:");
+    let sections = thoughtProcess.split(/(?=User message:|Internal Thinking:|Possible response to the user's prompt:)/g);
+    const userMessageSections = sections.filter(section => section.trim().startsWith("User message:"));
+    if (userMessageSections.length > 1) {
+        sections = sections.filter(section => {
+            if (section.trim().startsWith("User message:")) {
+                return section === userMessageSections[0];
+            }
+            return true;
+        });
+    }
+    return sections.map(section => section.trim()).join('\n\n');
+}
+
+function createThinkingComponent(formattedThoughts) {
+    const container = document.createElement('div');
+    container.className = 'thinking-container collapsed';
+    const button = document.createElement('button');
+    button.className = 'thinking-button';
+    button.innerHTML = `
+        <div class="thinking-button-top">
+            <span class="thinking-button-title">Thoughts</span>
+            <div class="thinking-button-dots">
+                <span class="thinking-button-dot"></span>
+                <span class="thinking-button-dot"></span>
+                <span class="thinking-button-dot"></span>
+            </div>
         </div>
-      </section>
-      <section class="contact-section section" id="contact">
-        <div class="contact-container">
-          <div class="contact-form">
-            <h2>Get in touch</h2>
-            <form id="contact-form" action="https://formspree.io/f/meojapne" method="POST">
-              <div class="form-group">
-                <label for="name">NAME</label>
-                <input type="text" name="name" placeholder="Enter your full name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">EMAIL</label>
-                <input type="email" name="email" placeholder="Enter your email" required>
-              </div>
-              <div class="form-group">
-                <label for="message">MESSAGE</label>
-                <textarea name="message" placeholder="Start typing here..." required></textarea>
-              </div>
-              <div class="privacy-policy">
-                <input type="checkbox" id="privacy" required>
-                <label for="privacy">I agree to the <a href="privacy.html">privacy policy</a>. </label>
-              </div>
-              <button type="submit" class="submit-btn">Submit</button>
-            </form>
-          </div>
+        <div class="thinking-button-right">
+            <i class="thinking-button-arrow"></i>
         </div>
-      </section>
-    </main>
-    <footer class="footer">
-      <ul class="social-icon">
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="https://www.youtube.com/@TheJerminator">
-            <ion-icon name="logo-youtube"></ion-icon>
-          </a>
-        </li>
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="#">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-        </li>
-      </ul>
-      <ul class="menu">
-        <li class="menu__item">
-          <a class="menu__link" href="#home">Home</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link" href="#about">About</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link" href="#work">Work</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link" href="#highlights">Highlights</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link" href="#contact">Contact</a>
-        </li>
-      </ul>
-      <p>&copy;2018 jerminator.edits | All Rights Reserved</p>
-    </footer>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="function.js"></script>
-  </body>
+        <div class="thinking-expand-text">Click to view model thoughts</div>
+    `;
+    const processDiv = document.createElement('div');
+    processDiv.className = 'thinking-process';
+    processDiv.textContent = formattedThoughts;
+    button.addEventListener('click', () => {
+        container.classList.toggle('collapsed');
+        container.classList.toggle('expanded');
+        button.querySelector('.thinking-button-arrow').classList.toggle('open');
+        const expandText = button.querySelector('.thinking-expand-text');
+        expandText.textContent = container.classList.contains('expanded')
+            ? "A.I Model's thoughts are experimental"
+            : "Click to view model thoughts";
+    });
+    container.appendChild(button);
+    container.appendChild(processDiv);
+    return container;
+}
+
+function displayAiMessage(fullResponse) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai-message';
+    const messageContentDiv = document.createElement('div');
+    messageContentDiv.className = 'message-content';
+    const parts = fullResponse.split('MODEL_OUTPUT-');
+    let output = '';
+
+    if (parts.length > 0) {
+        const thinkingPart = parts[0].replace('THINKING-', '').trim();
+        if (thinkingPart) {
+            const formattedThoughts = formatThoughtProcess(thinkingPart);
+            const thinkingComponent = createThinkingComponent(formattedThoughts);
+            messageContentDiv.appendChild(thinkingComponent);
+        }
+    }
+
+    if (parts.length > 1) {
+        output = parts[1].trim();
+        if (output) {
+            const outputDiv = document.createElement('div');
+            const lines = output.trim().split('\n');
+            let currentList = null;
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+                const numberedMatch = line.match(/^(\d+)\.\s+(.*)/);
+                if (numberedMatch) {
+                    if (!currentList) {
+                        currentList = document.createElement('ol');
+                        outputDiv.appendChild(currentList);
+                    }
+                    const listItem = document.createElement('li');
+                    listItem.textContent = numberedMatch[2];
+                    currentList.appendChild(listItem);
+                } else {
+                    currentList = null;
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = line;
+                    outputDiv.appendChild(paragraph);
+                }
+            });
+            messageContentDiv.appendChild(outputDiv);
+        }
+    }
+
+    messageDiv.innerHTML = `<div class="avatar">C</div>`;
+    messageDiv.appendChild(messageContentDiv);
+    chatContainer.appendChild(messageDiv);
+    scrollToBottom();
+}
+
+// Backend Communication
+async function sendToBackend(message) {
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        return data.response;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to communicate with AI');
+    }
+}
+
+// Main Message Handler
+async function sendMessage() {
+    const message = textarea.value.trim();
+    if (!message) return;
+    try {
+        setInputState(true);
+        displayUserMessage(message);
+        chatHistory.push({ sender: 'user', content: message });
+        textarea.value = '';
+        autoResize(textarea);
+        displayLoadingAnimation();
+        const aiResponse = await sendToBackend(message);
+        removeLoadingAnimation();
+        displayAiMessage(aiResponse);
+        chatHistory.push({ sender: 'assistant', content: aiResponse });
+        // Automatically restart voice mode after AI responds ONLY if it was manually enabled
+        if (voiceModeManuallyEnabled && SpeechRecognition) {
+            clearTimeout(autoRestartVoiceTimeout);
+            autoRestartVoiceTimeout = setTimeout(() => {
+                if (!isVoiceActive) {
+                    recognition.start();
+                }
+            }, AUTO_RESTART_DELAY);
+        }
+    } catch (error) {
+        removeLoadingAnimation();
+        displayAiMessage("Sorry, I encountered an error communicating with the AI.");
+    } finally {
+        setInputState(false);
+        textarea.focus();
+    }
+}
+
+// Voice Mode Functionality
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function toggleVoiceActiveClass(isActive) {
+    headerTitle.classList.toggle('voice-active', isActive);
+}
+
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+        isVoiceActive = true;
+        voiceButton.classList.add('active', 'listening');
+        voiceModeIndicator.classList.add('active');
+        toggleVoiceActiveClass(true);
+        textarea.placeholder = 'Listening...';
+    };
+
+    recognition.onresult = (event) => {
+        let interimTranscript = '';
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript;
+            } else {
+                interimTranscript += event.results[i][0].transcript;
+            }
+        }
+        textarea.value = finalTranscript || interimTranscript;
+        autoResize(textarea);
+    };
+
+    recognition.onend = () => {
+        isVoiceActive = false;
+        voiceButton.classList.remove('active', 'listening');
+        voiceModeIndicator.classList.remove('active');
+        toggleVoiceActiveClass(false);
+        textarea.placeholder = 'Message GEN-T...';
+        if (textarea.value.trim() && voiceModeManuallyEnabled) {
+            sendMessage();
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        isVoiceActive = false;
+        voiceButton.classList.remove('active', 'listening');
+        voiceModeIndicator.classList.remove('active');
+        toggleVoiceActiveClass(false);
+        textarea.placeholder = 'Message GEN-T... (Voice error)';
+    };
+} else {
+    voiceButton.style.display = 'none';
+    console.warn('Speech Recognition API is not supported in this browser.');
+}
+
+voiceButton.addEventListener('click', () => {
+    if (SpeechRecognition) {
+        voiceModeManuallyEnabled = !voiceModeManuallyEnabled; // Toggle the flag
+        if (voiceModeManuallyEnabled) {
+            recognition.start();
+        } else {
+            recognition.stop();
+            clearTimeout(autoRestartVoiceTimeout); // Clear auto-restart if manually stopped
+        }
+    } else {
+        alert('Voice mode is not supported in your browser.');
+    }
+});
+
+// Event Listeners
+textarea.addEventListener('input', () => autoResize(textarea));
+textarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+sendButton.addEventListener('click', sendMessage);
+
+// Initialize
+autoResize(textarea);
+
+// New Chat Functionality
+const newChatButton = document.getElementById('new-chat-btn');
+newChatButton.addEventListener('click', startNewChat);
+
+async function startNewChat() {
+    chatContainer.innerHTML = `
+        <div class="message ai-message">
+            <div class="avatar">S</div>
+            <div class="message-content">
+                Hi there! How can I help you today?
+            </div>
+        </div>
+    `;
+    try {
+        const response = await fetch('/api/new_chat', {
+            method: 'POST',
+        });
+        if (!response.ok) {
+            console.error('Failed to start new chat on the backend.');
+        }
+    } catch (error) {
+        console.error('Error starting new chat:', error);
+    }
+}
+
+// Sidebar Toggle Functionality
+sidebarToggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+});
+
+mainSidebarToggle.addEventListener('click', () => {
+  if (window.innerWidth > 768) {
+    tooltipsActive = !tooltipsActive;
+    tooltipTargets.forEach((target, index) => {
+      const tooltip = target.querySelector('.tooltip-text');
+      if (tooltipsActive) {
+        setTimeout(() => {
+            tooltip.classList.add('tooltip-active');
+        }, index * 50); // Stagger animation with a delay for each tooltip
+      } else {
+        // Add fade-out class and remove it after animation
+        tooltip.classList.add('tooltip-fade-out');
+        setTimeout(() => {
+          tooltip.classList.remove('tooltip-active', 'tooltip-fade-out');
+        }, 300); // Match the transition duration
+      }
+    });
+  } else {
+    sidebar.classList.toggle('open');
+  }
+});
+
+// Add event listener for the secondary sidebar button
+const sidebarButtonInside = document.querySelector('.sidebar .sidebar-top .sidebar-btn');
+if (sidebarButtonInside) {
+    sidebarButtonInside.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+    });
+}
+       // Event listener for opening and closing the card
+        helpFeedbackBtn.addEventListener('click', openCard);
+
+        closeCardBtn.addEventListener('click', closeCard);
+         overlay.addEventListener('click', closeCard);
+
+        prevBtn.addEventListener('click', () => {
+            currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
+            updateCardText();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
+            updateCardText();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (cardContainer.classList.contains('open')) {
+                if (event.key === 'ArrowLeft') {
+                    currentTextIndex = (currentTextIndex - 1 + cardTexts.length) % cardTexts.length;
+                    updateCardText();
+                } else if (event.key === 'ArrowRight') {
+                    currentTextIndex = (currentTextIndex + 1) % cardTexts.length;
+                    updateCardText();
+                }
+            }
+        });
+
+        updateCardText(); // Initialize the card text
+// Get all sidebar buttons EXCEPT the main toggle
+const sidebarButtons = document.querySelectorAll('.sidebar .sidebar-btn:not(#main-sidebar-toggle)');
+
+// Add click event listener to each sidebar button
+sidebarButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (sidebar.classList.contains('open')) {
+           sidebar.classList.remove('open');
+        }
+    });
+});
+
+// Event listeners for the remaining sidebar buttons (replace with your desired functionality)
+const heartButton = document.querySelector('.sidebar-bottom button:nth-child(1)');
+const questionButton = document.querySelector('.sidebar-bottom button:nth-child(2)');
+const refreshButton = document.querySelector('.sidebar-bottom button:nth-child(3)');
+const settingsButton = document.querySelector('.sidebar-bottom button:nth-child(4)');
+
+heartButton.addEventListener('click', () => {
+    console.log('Heart button clicked');
+    // Add your functionality for the heart button here
+});
+
+questionButton.addEventListener('click', () => {
+    console.log('Question button clicked');
+    // Add your functionality for the question button here
+});
+
+refreshButton.addEventListener('click', () => {
+    console.log('Refresh button clicked');
+    // Add your functionality for the refresh button here, potentially clearing the chat
+    startNewChat(); // Example: clear chat on refresh
+});
+
+settingsButton.addEventListener('click', () => {
+    console.log('Settings button clicked');
+    // Add your functionality for the settings button here
+});
+
+  // Ensure card is closed initially
+    cardContainer.style.display = 'none';
+
+    </script>
+</body>
 </html>
