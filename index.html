@@ -419,6 +419,7 @@
             background: #0a0a0a;
             backdrop-filter: blur(20px);
              border-top: 1px solid rgba(255, 255, 255, 0.1);
+             transition: transform 0.3s ease-out; /* For smooth keyboard appearance */
         }
 
         @media (min-width: 769px) {
@@ -429,9 +430,13 @@
 
         @media (max-width: 768px) {
             .input-container {
-                padding: 1rem;
                 position: fixed; /* Fix input container to the bottom on mobile */
                 z-index: 200; /* Ensure it's above the chat content */
+                padding: 1rem;
+            }
+
+            .input-container.input-focus {
+                transform: translateY(-50%); /* Adjust as needed for keyboard height */
             }
         }
 
@@ -922,7 +927,8 @@
 
 /* Show the tooltip when hovering over the button (only if not active) */
 .sidebar-btn:hover .tooltip-text:not(.tooltip-active) {
-    visibility: visible    opacity: 1;
+    visibility: visible;
+    opacity: 1;
     transform: translateY(-50%) scale(1.05) translateX(0);
 }
 
@@ -1609,6 +1615,22 @@ voiceButton.addEventListener('click', () => {
 
 // Event Listeners
 textarea.addEventListener('input', () => autoResize(textarea));
+textarea.addEventListener('focus', () => {
+    if (window.innerWidth <= 768) {
+        document.querySelector('.input-container').classList.add('input-focus');
+        // Optionally scroll to bring input into view
+        setTimeout(() => {
+            document.querySelector('.input-container').scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }, 100); // Adjust timeout as needed
+    }
+});
+
+textarea.addEventListener('blur', () => {
+    if (window.innerWidth <= 768) {
+        document.querySelector('.input-container').classList.remove('input-focus');
+    }
+});
+
 textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
