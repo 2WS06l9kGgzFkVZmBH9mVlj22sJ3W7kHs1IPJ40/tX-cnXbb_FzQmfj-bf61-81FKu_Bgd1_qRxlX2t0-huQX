@@ -1,3 +1,4 @@
+--- START OF FILE index.html ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +39,7 @@
             min-height: 100vh;
             overflow: hidden;
             transition: filter 0.3s ease;
+            overscroll-behavior: none; /* Prevent pull-to-refresh */
         }
 
         body.blur {
@@ -419,24 +421,26 @@
             background: #0a0a0a;
             backdrop-filter: blur(20px);
              border-top: 1px solid rgba(255, 255, 255, 0.1);
-             transition: transform 0.3s ease-out; /* For smooth keyboard appearance */
+             transition: transform 0.3s ease-in-out; /* Add transition for smooth movement */
         }
 
         @media (min-width: 769px) {
             .input-container {
                 left: var(--sidebar-width);
+                transform: translateY(0); /* Reset transform on desktop */
             }
         }
 
         @media (max-width: 768px) {
             .input-container {
+                padding: 1rem;
                 position: fixed; /* Fix input container to the bottom on mobile */
                 z-index: 200; /* Ensure it's above the chat content */
-                padding: 1rem;
+                transform: translateY(0); /* Initial position on mobile */
             }
 
-            .input-container.input-focus {
-                transform: translateY(-50%); /* Adjust as needed for keyboard height */
+            .input-container.input-focused {
+                transform: translateY(-30vh); /* Adjust as needed to raise above keyboard */
             }
         }
 
@@ -1236,6 +1240,7 @@ const voiceModeIndicator = document.getElementById('voice-mode-indicator');
 const headerTitle = document.getElementById('header-title');
 const mainSidebarToggle = document.getElementById('main-sidebar-toggle');
 const tooltipTargets = document.querySelectorAll('.tooltip-target');
+const inputContainer = document.querySelector('.input-container'); // Get the input container
 let chatHistory = [];
 let isVoiceActive = false;
 let recognition = null;
@@ -1617,20 +1622,15 @@ voiceButton.addEventListener('click', () => {
 textarea.addEventListener('input', () => autoResize(textarea));
 textarea.addEventListener('focus', () => {
     if (window.innerWidth <= 768) {
-        document.querySelector('.input-container').classList.add('input-focus');
-        // Optionally scroll to bring input into view
-        setTimeout(() => {
-            document.querySelector('.input-container').scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }, 100); // Adjust timeout as needed
+        inputContainer.classList.add('input-focused');
     }
 });
 
 textarea.addEventListener('blur', () => {
     if (window.innerWidth <= 768) {
-        document.querySelector('.input-container').classList.remove('input-focus');
+        inputContainer.classList.remove('input-focused');
     }
 });
-
 textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
