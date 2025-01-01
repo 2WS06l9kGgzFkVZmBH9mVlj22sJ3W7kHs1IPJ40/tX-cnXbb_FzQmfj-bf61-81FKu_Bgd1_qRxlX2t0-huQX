@@ -213,12 +213,12 @@
             }
         }
 
-        .try-advanced {
+        .research {
             padding: 0.75rem 1.25rem;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
+            background: #000;
+            border: 1px solid #fff;
+            color: #fff;
             font-size: 0.95rem;
             cursor: pointer;
             display: flex;
@@ -227,9 +227,8 @@
             transition: all 0.3s ease;
         }
 
-        .try-advanced:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-1px);
+        .research:hover {
+            border: 1px solid #76B900;
         }
          /* ===================================== */
         /*            Chat Container             */
